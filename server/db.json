@@ -1,0 +1,119 @@
+{
+  "patients": [
+    {
+      "id": "1",
+      "idNumber": "116440714",
+      "name": "José Chaverri",
+      "phone": "84521674",
+      "email": "jose@gmail.com"
+    },
+    {
+      "id": "3476",
+      "idNumber": "2514697119",
+      "name": "Esteban Hernandez",
+      "phone": "64258734",
+      "email": "esteban@gmail.com"
+    },
+    {
+      "id": "ed67",
+      "idNumber": "256145452",
+      "name": "Pablo Rodriguez",
+      "phone": "87564123",
+      "email": "pablo@gmail.com"
+    },
+    {
+      "id": "d9a0",
+      "idNumber": "124569873",
+      "name": "Luis Santamaria",
+      "phone": "84526374",
+      "email": "luisnt@gmail.com"
+    }
+  ],
+  "medications": [
+    {
+      "id": "1",
+      "code": "IBU-400",
+      "name": "Ibuprofeno 400mg",
+      "stock": 116
+    },
+    {
+      "id": "34c7",
+      "code": "AMOX",
+      "name": "Amoxicilina",
+      "stock": 50
+    },
+    {
+      "id": "a3ad",
+      "code": "DZP-001",
+      "name": "Diazepam",
+      "stock": 60
+    },
+    {
+      "id": "0e3e",
+      "code": "ELT-9243",
+      "name": "Eltrombopag 25 mg",
+      "stock": 35
+    },
+    {
+      "id": "6072",
+      "code": "RPT-561",
+      "name": "Rupatrix 10mg",
+      "stock": 15
+    }
+  ],
+  "requests": [
+    {
+      "id": "9d2b",
+      "patientId": 3476,
+      "medicationId": 1,
+      "qty": 4,
+      "status": "DELIVERED",
+      "createdAt": "2025-09-26T03:57:59.914Z"
+    },
+    {
+      "id": "a2c0",
+      "patientId": 1,
+      "medicationId": 1,
+      "qty": 4,
+      "status": "CREATED",
+      "createdAt": "2025-09-26T05:19:13.484Z"
+    },
+    {
+      "id": "b25d",
+      "patientId": "ed67",
+      "medicationId": "a3ad",
+      "qty": 20,
+      "status": "APPROVED",
+      "createdAt": "2025-09-26T05:36:47.427Z"
+    },
+    {
+      "id": "73e3",
+      "patientId": "ed67",
+      "medicationId": "0e3e",
+      "qty": 10,
+      "status": "APPROVED",
+      "createdAt": "2025-09-26T05:38:08.903Z"
+    },
+    {
+      "id": "93f3",
+      "patientId": "d9a0",
+      "medicationId": 6072,
+      "qty": 25,
+      "status": "CREATED",
+      "createdAt": "2025-09-26T05:38:20.915Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "jose",
+      "role": "patient",
+      "patientId": 1
+    }
+  ]
+}
