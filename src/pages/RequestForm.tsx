@@ -42,8 +42,8 @@ export default function RequestForm() {
   const createMut = useMutation({
     mutationFn: (vals: FormValues) => {
       const payload: Request = {
-        ...vals,                       // patientId y medicationId pueden ser string o number
-        status: "CREATED",
+        ...vals,
+        status: "CREADA", 
         createdAt: new Date().toISOString(),
       };
       return createRequest(payload);
@@ -61,6 +61,8 @@ export default function RequestForm() {
       <h2 className="text-lg font-semibold mb-4">Nueva solicitud</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
+        {/* PACIENTE */}
         <div>
           <label className="block text-sm mb-1">Paciente</label>
           <select className="w-full rounded border p-2" {...register("patientId")}>
@@ -71,9 +73,12 @@ export default function RequestForm() {
               </option>
             ))}
           </select>
-          {errors.patientId && <p className="text-red-600 text-sm">{errors.patientId.message as string}</p>}
+          {errors.patientId && (
+            <p className="text-red-600 text-sm">{errors.patientId.message as string}</p>
+          )}
         </div>
 
+        {/* MEDICAMENTO */}
         <div>
           <label className="block text-sm mb-1">Medicamento</label>
           <select className="w-full rounded border p-2" {...register("medicationId")}>
@@ -84,23 +89,43 @@ export default function RequestForm() {
               </option>
             ))}
           </select>
-          {errors.medicationId && <p className="text-red-600 text-sm">{errors.medicationId.message as string}</p>}
+          {errors.medicationId && (
+            <p className="text-red-600 text-sm">{errors.medicationId.message as string}</p>
+          )}
         </div>
 
+        {/* CANTIDAD */}
         <div>
           <label className="block text-sm mb-1">Cantidad</label>
-          <input type="number" className="w-full rounded border p-2" {...register("qty")} min={1} />
-          {errors.qty && <p className="text-red-600 text-sm">{errors.qty.message}</p>}
+          <input
+            type="number"
+            className="w-full rounded border p-2"
+            {...register("qty")}
+            min={1}
+          />
+          {errors.qty && (
+            <p className="text-red-600 text-sm">{errors.qty.message}</p>
+          )}
         </div>
 
+        {/* BOTONES */}
         <div className="flex gap-2">
-          <button className="px-4 py-2 rounded bg-blue-600 text-white" type="submit" disabled={createMut.isPending}>
+          <button
+            className="px-4 py-2 rounded bg-blue-600 text-white"
+            type="submit"
+            disabled={createMut.isPending}
+          >
             Crear
           </button>
-          <button className="px-4 py-2 rounded border" type="button" onClick={() => nav("/requests")}>
+          <button
+            className="px-4 py-2 rounded border"
+            type="button"
+            onClick={() => nav("/requests")}
+          >
             Cancelar
           </button>
         </div>
+
       </form>
     </section>
   );

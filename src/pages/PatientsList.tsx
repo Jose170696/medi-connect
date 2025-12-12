@@ -10,7 +10,6 @@ export default function PatientsList() {
     queryFn: listPatients,
   });
 
-  // Acepta Id (number | string)
   const delMut = useMutation<void, Error, Id>({
     mutationFn: (id) => deletePatient(id),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["patients"] }),
@@ -25,7 +24,10 @@ export default function PatientsList() {
     <section>
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-semibold">Pacientes</h2>
-        <Link to="/patients/new" className="px-3 py-2 rounded bg-blue-600 text-white">
+        <Link
+          to="/patients/new"
+          className="px-3 py-2 rounded bg-blue-600 text-white"
+        >
           Nuevo
         </Link>
       </div>
@@ -36,8 +38,10 @@ export default function PatientsList() {
             <tr>
               <th className="p-3">Cédula</th>
               <th className="p-3">Nombre</th>
+              <th className="p-3">Fecha nac.</th>
               <th className="p-3">Teléfono</th>
               <th className="p-3">Email</th>
+              <th className="p-3">Tipo sangre</th>
               <th className="p-3 w-40">Acciones</th>
             </tr>
           </thead>
@@ -46,18 +50,25 @@ export default function PatientsList() {
               <tr key={String(p.id)} className="border-b last:border-0">
                 <td className="p-3">{p.idNumber}</td>
                 <td className="p-3">{p.name}</td>
+                <td className="p-3">{p.birthDate || "—"}</td>
                 <td className="p-3">{p.phone ?? "—"}</td>
                 <td className="p-3">{p.email ?? "—"}</td>
+                <td className="p-3">{p.bloodType || "—"}</td>
                 <td className="p-3">
                   <div className="flex gap-2">
-                    <Link to={`/patients/${p.id}/edit`} className="px-3 py-1 rounded border">
+                    <Link
+                      to={`/patients/${p.id}/edit`}
+                      className="px-3 py-1 rounded border"
+                    >
                       Editar
                     </Link>
                     <button
                       className="px-3 py-1 rounded bg-red-600 text-white"
                       disabled={delMut.isPending}
                       onClick={() => {
-                        if (p.id && confirm(`Eliminar a ${p.name}?`)) delMut.mutate(p.id);
+                        if (p.id && confirm(`Eliminar a ${p.name}?`)) {
+                          delMut.mutate(p.id);
+                        }
                       }}
                     >
                       {delMut.isPending ? "Eliminando..." : "Eliminar"}
@@ -67,7 +78,11 @@ export default function PatientsList() {
               </tr>
             ))}
             {rows.length === 0 && (
-              <tr><td className="p-3" colSpan={5}>Sin registros.</td></tr>
+              <tr>
+                <td className="p-3" colSpan={7}>
+                  Sin registros.
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

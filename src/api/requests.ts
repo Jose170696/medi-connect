@@ -6,7 +6,7 @@ export type Request = {
   patientId: Id;            
   medicationId: Id;
   qty: number;
-  status: "CREATED" | "APPROVED" | "PREPARING" | "OUT_FOR_DELIVERY" | "DELIVERED" | "REJECTED";
+  status: "CREADA" | "APROBADA" | "PREPARANDO" | "ENVIANDO" | "ENTREGADA" | "RECHAZADA";
   createdAt: string;
 };
 

@@ -4,7 +4,6 @@ import { listPatients, type Id, type Patient } from "../api/patients";
 import { listMedications, type Medication } from "../api/medications";
 import { listRequests, type Request } from "../api/requests";
 
-
 // ===== Helpers de ids mixtos (number | string) =====
 const eqId = (a?: Id, b?: Id) => String(a) === String(b);
 const byId = <T extends { id?: Id }>(list?: T[], id?: Id) =>
@@ -21,15 +20,27 @@ const codeNameOf = (id?: Id, meds?: Medication[]) => {
 // ===== Badge de estado =====
 function StatusBadge({ status }: { status: Request["status"] }) {
   const map: Record<Request["status"], string> = {
-    CREATED: "bg-gray-100 text-gray-800",
-    APPROVED: "bg-blue-100 text-blue-800",
-    PREPARING: "bg-yellow-100 text-yellow-800",
-    OUT_FOR_DELIVERY: "bg-indigo-100 text-indigo-800",
-    DELIVERED: "bg-green-100 text-green-800",
-    REJECTED: "bg-red-100 text-red-800",
+    CREADA: "bg-gray-100 text-gray-800",
+    APROBADA: "bg-blue-100 text-blue-800",
+    PREPARANDO: "bg-yellow-100 text-yellow-800",
+    ENVIANDO: "bg-indigo-100 text-indigo-800",
+    ENTREGADA: "bg-green-100 text-green-800",
+    RECHAZADA: "bg-red-100 text-red-800",
   };
+
+  const label: Record<Request["status"], string> = {
+    CREADA: "Creada",
+    APROBADA: "Aprobada",
+    PREPARANDO: "Preparando",
+    ENVIANDO: "Enviando",
+    ENTREGADA: "Entregada",
+    RECHAZADA: "Rechazada",
+  };
+
   return (
-    <span className={`px-2 py-1 rounded text-xs ${map[status]}`}>{status}</span>
+    <span className={`px-2 py-1 rounded text-xs ${map[status]}`}>
+      {label[status]}
+    </span>
   );
 }
 
@@ -64,7 +75,9 @@ function Card({
           <div className="min-w-0">
             <p className="text-sm text-gray-500">{title}</p>
             <p className="text-3xl font-semibold leading-tight">{value}</p>
-            {subtitle && <p className="mt-1 text-xs text-gray-500">{subtitle}</p>}
+            {subtitle && (
+              <p className="mt-1 text-xs text-gray-500">{subtitle}</p>
+            )}
           </div>
         </div>
       </div>
@@ -138,7 +151,7 @@ export default function Dashboard() {
             <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
               {/* user-group icon */}
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3Zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3Zm0 2c-2.33 0-7 1.17-7 3.5V19h10v-2.5C11 14.17 6.33 13 4 13Zm12 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.95 1.97 3.45V19h5v-2.5C22 14.17 18.33 13 16 13Z"/>
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3Zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3Zm0 2c-2.33 0-7 1.17-7 3.5V19h10v-2.5C11 14.17 6.33 13 4 13Zm12 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.95 1.97 3.45V19h5v-2.5C22 14.17 18.33 13 16 13Z" />
               </svg>
             </div>
           }
@@ -152,7 +165,7 @@ export default function Dashboard() {
             <div className="p-2 rounded-xl bg-purple-50 text-purple-600">
               {/* pills icon */}
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 3a5 5 0 0 0-5 5c0 1.33.52 2.55 1.46 3.46l8.08 8.08A4.99 4.99 0 1 0 19 11a5 5 0 0 0-5-5H8Zm7 2a3 3 0 0 1 0 6h-2V5h2ZM6.46 7.46A3 3 0 0 1 8 7h2v6H8a3 3 0 0 1-2.12-5.12l.58-.42Z"/>
+                <path d="M8 3a5 5 0 0 0-5 5c0 1.33.52 2.55 1.46 3.46l8.08 8.08A4.99 4.99 0 1 0 19 11a5 5 0 0 0-5-5H8Zm7 2a3 3 0 0 1 0 6h-2V5h2ZM6.46 7.46A3 3 0 0 1 8 7h2v6H8a3 3 0 0 1-2.12-5.12l.58-.42Z" />
               </svg>
             </div>
           }
@@ -166,7 +179,7 @@ export default function Dashboard() {
             <div className="p-2 rounded-xl bg-amber-50 text-amber-600">
               {/* inbox icon */}
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3H5a2 2 0 0 0-2 2v12a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V5a2 2 0 0 0-2-2Zm0 12h-3.38a2 2 0 0 0-1.79 1.11l-.28.56a1 1 0 0 1-.9.56h-1.3a1 1 0 0 1-.9-.56l-.28-.56A2 2 0 0 0 8.38 15H5V5h14v10Z"/>
+                <path d="M19 3H5a2 2 0 0 0-2 2v12a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V5a2 2 0 0 0-2-2Zm0 12h-3.38a2 2 0 0 0-1.79 1.11l-.28.56a1 1 0 0 1-.9.56h-1.3a1 1 0 0 1-.9-.56l-.28-.56A2 2 0 0 0 8.38 15H5V5h14v10Z" />
               </svg>
             </div>
           }
@@ -195,7 +208,7 @@ export default function Dashboard() {
             </thead>
             <tbody>
               {recents.map((r) => (
-                <tr key={r.id} className="border-b last:border-0">
+                <tr key={String(r.id)} className="border-b last:border-0">
                   <td className="p-3">{nameOf(r.patientId, patients)}</td>
                   <td className="p-3">{codeNameOf(r.medicationId, meds)}</td>
                   <td className="p-3">{r.qty}</td>

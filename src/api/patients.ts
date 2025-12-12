@@ -4,10 +4,19 @@ export type Id = number | string;
 
 export type Patient = {
   id?: Id;
+
+  // Datos personales
   idNumber: string;
   name: string;
+  birthDate: string;       // YYYY-MM-DD
   phone?: string;
   email?: string;
+  address?: string;
+
+  // Datos médicos esenciales
+  bloodType?: string;          // O+, O-, A+, A-, etc.
+  allergies?: string;          // Ej: "Penicilina"
+  chronicConditions?: string;  // Ej: "Diabetes, Hipertensión"
 };
 
 /** GET /patients */

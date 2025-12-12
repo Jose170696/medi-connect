@@ -5,28 +5,60 @@
       "idNumber": "116440714",
       "name": "José Chaverri",
       "phone": "84521674",
-      "email": "jose@gmail.com"
+      "email": "jose@gmail.com",
+      "birthDate": "1997-02-11",
+      "address": "Alajuela",
+      "bloodType": "O+",
+      "allergies": "Penicilina",
+      "chronicConditions": "Hipertension"
     },
     {
       "id": "3476",
       "idNumber": "2514697119",
       "name": "Esteban Hernandez",
       "phone": "64258734",
-      "email": "esteban@gmail.com"
+      "email": "esteban@gmail.com",
+      "birthDate": "1995-06-16",
+      "address": "San Jose",
+      "bloodType": "A+",
+      "allergies": "Sulfas",
+      "chronicConditions": "Diabetes tipo 2"
     },
     {
-      "id": "ed67",
-      "idNumber": "256145452",
-      "name": "Pablo Rodriguez",
-      "phone": "87564123",
-      "email": "pablo@gmail.com"
-    },
-    {
-      "id": "d9a0",
-      "idNumber": "124569873",
+      "id": "b8d0",
+      "idNumber": "309874512",
       "name": "Luis Santamaria",
-      "phone": "84526374",
-      "email": "luisnt@gmail.com"
+      "birthDate": "1989-10-26",
+      "phone": "71234567",
+      "email": "luisnt@gmail.com",
+      "address": "Heredia",
+      "bloodType": "O−",
+      "allergies": "Mariscos",
+      "chronicConditions": "Migrañas crónicas"
+    },
+    {
+      "id": "5c61",
+      "idNumber": "154869724",
+      "name": "Pablo Rodriguez",
+      "birthDate": "1990-07-12",
+      "phone": "64321987",
+      "email": "pablo@gmail.com",
+      "address": "Cartago",
+      "bloodType": "B−",
+      "allergies": "Polen",
+      "chronicConditions": "Asma"
+    },
+    {
+      "id": "bb44",
+      "idNumber": "402398745",
+      "name": "Natalia Rojas",
+      "birthDate": "1994-03-22",
+      "phone": "72549831",
+      "email": "natalia.rojas@gmail.com",
+      "address": "Puntarenas",
+      "bloodType": "A-",
+      "allergies": "Gluten",
+      "chronicConditions": "Artritis temprana"
     }
   ],
   "medications": [
@@ -52,55 +84,43 @@
       "id": "0e3e",
       "code": "ELT-9243",
       "name": "Eltrombopag 25 mg",
-      "stock": 35
+      "stock": 45
     },
     {
       "id": "6072",
       "code": "RPT-561",
       "name": "Rupatrix 10mg",
-      "stock": 15
-    }
-  ],
-  "requests": [
-    {
-      "id": "9d2b",
-      "patientId": 3476,
-      "medicationId": 1,
-      "qty": 4,
-      "status": "DELIVERED",
-      "createdAt": "2025-09-26T03:57:59.914Z"
+      "stock": 13
     },
     {
-      "id": "a2c0",
-      "patientId": 1,
-      "medicationId": 1,
-      "qty": 4,
-      "status": "CREATED",
-      "createdAt": "2025-09-26T05:19:13.484Z"
+      "id": "a70d",
+      "code": "PARA-500",
+      "name": "Paracetamol 500 mg",
+      "stock": 140
     },
     {
-      "id": "b25d",
-      "patientId": "ed67",
-      "medicationId": "a3ad",
-      "qty": 20,
-      "status": "APPROVED",
-      "createdAt": "2025-09-26T05:36:47.427Z"
+      "id": "9e5d",
+      "code": "AZT-250",
+      "name": "Azitromicina 250 mg",
+      "stock": 45
     },
     {
-      "id": "73e3",
-      "patientId": "ed67",
-      "medicationId": "0e3e",
-      "qty": 10,
-      "status": "APPROVED",
-      "createdAt": "2025-09-26T05:38:08.903Z"
+      "id": "6651",
+      "code": "METF-850",
+      "name": "Metformina 850 mg",
+      "stock": 72
     },
     {
-      "id": "93f3",
-      "patientId": "d9a0",
-      "medicationId": 6072,
-      "qty": 25,
-      "status": "CREATED",
-      "createdAt": "2025-09-26T05:38:20.915Z"
+      "id": "7a63",
+      "code": "INS-REG",
+      "name": "Insulina Regular",
+      "stock": 16
+    },
+    {
+      "id": "918a",
+      "code": "LORA-010",
+      "name": "Loratadina 10 mg",
+      "stock": 80
     }
   ],
   "users": [

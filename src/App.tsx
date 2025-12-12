@@ -6,6 +6,7 @@ import MedicationsList from "./pages/MedicationsList";
 import MedicationForm from "./pages/MedicationForm";
 import RequestsList from "./pages/RequestsList";
 import RequestForm from "./pages/RequestForm";
+import Reports from "./pages/Reports";
 
 export default function App() {
   return (
@@ -17,12 +18,14 @@ export default function App() {
           <Link to="/patients" className="hover:underline">Pacientes</Link>
           <Link to="/medications" className="hover:underline">Medicamentos</Link>
           <Link to="/requests" className="hover:underline">Solicitudes</Link>
+          <Link to="/reports" className="hover:underline">Reportes</Link> 
         </nav>
       </header>
 
       <main className="p-6">
         <Routes>
           <Route path="/" element={<Dashboard />} />
+
           <Route path="/patients" element={<PatientsList />} />
           <Route path="/patients/new" element={<PatientForm />} />
           <Route path="/patients/:id/edit" element={<PatientForm />} />
@@ -33,6 +36,8 @@ export default function App() {
 
           <Route path="/requests" element={<RequestsList />} />
           <Route path="/requests/new" element={<RequestForm />} />
+
+          <Route path="/reports" element={<Reports />} /> 
         </Routes>
       </main>
     </div>
