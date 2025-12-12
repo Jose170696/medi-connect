@@ -14,7 +14,7 @@ import {
 } from "../api/medications";
 import { Link } from "react-router-dom";
 
-// Badge por estado (clases Tailwind)
+// Badge por estado
 const badge = (s: Request["status"]) => {
   const map: Record<Request["status"], string> = {
     CREADA: "bg-gray-100 text-gray-800",
@@ -27,7 +27,6 @@ const badge = (s: Request["status"]) => {
   return `px-2 py-1 rounded text-xs ${map[s]}`;
 };
 
-// Etiqueta amigable para mostrar
 const statusLabel: Record<Request["status"], string> = {
   CREADA: "Creada",
   APROBADA: "Aprobada",
@@ -65,11 +64,9 @@ export default function RequestsList() {
     queryFn: listMedications,
   });
 
-  // Buscar nombre del paciente
   const nameOf = (id: number | string | undefined) =>
     patients.find((p) => String(p.id) === String(id))?.name ?? "—";
 
-  // Etiqueta del medicamento
   const medLabel = (id: number | string | undefined) => {
     const m = meds.find((x) => String(x.id) === String(id));
     return m ? `${m.code} — ${m.name}` : "—";
@@ -80,11 +77,13 @@ export default function RequestsList() {
       // CREADA -> APROBADA: descontar stock
       if (req.status === "CREADA" && to === "APROBADA") {
         const med = await getMedication(req.medicationId);
-        if (med.stock < req.qty) throw new Error("Stock insuficiente");
+        if (med.stock < req.qty) {
+          throw new Error("Stock insuficiente");
+        }
         await updateMedication(med.id!, { ...med, stock: med.stock - req.qty });
       }
 
-      // Si se rechaza luego de haber descontado stock (APROBADA/PREPARANDO/ENVIANDO)
+      // Si estaba APROBADA / PREPARANDO / ENVIANDO y pasa a RECHAZADA -> devolver stock
       if (
         ["APROBADA", "PREPARANDO", "ENVIANDO"].includes(req.status) &&
         to === "RECHAZADA"
@@ -99,11 +98,15 @@ export default function RequestsList() {
       qc.invalidateQueries({ queryKey: ["requests"] });
       qc.invalidateQueries({ queryKey: ["medications"] });
     },
+    onError: (err) => {
+      console.error("Error al actualizar estado:", err);
+      alert("No se pudo actualizar el estado. Revisa la consola.");
+    },
   });
 
   const mutateDelete = useMutation({
     mutationFn: async (req: Request) => {
-      // Si se elimina sin estar entregada/rechazada, revisar si hay que devolver stock
+      // Si NO está entregada ni rechazada, revisamos stock
       if (!["ENTREGADA", "RECHAZADA"].includes(req.status)) {
         const med = await getMedication(req.medicationId);
 
@@ -118,6 +121,10 @@ export default function RequestsList() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["requests"] });
       qc.invalidateQueries({ queryKey: ["medications"] });
+    },
+    onError: (err) => {
+      console.error("Error al eliminar solicitud:", err);
+      alert("No se pudo eliminar la solicitud. Revisa la consola.");
     },
   });
 

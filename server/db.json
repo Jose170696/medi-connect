@@ -59,6 +59,18 @@
       "bloodType": "A-",
       "allergies": "Gluten",
       "chronicConditions": "Artritis temprana"
+    },
+    {
+      "id": "f0ac",
+      "idNumber": "206487519",
+      "name": "Walter Hartwell White Sr.",
+      "birthDate": "1958-09-07",
+      "phone": "(505) 117-8987",
+      "email": "heisenberg@gmail.com",
+      "address": "Albuquerque",
+      "bloodType": "A-",
+      "allergies": "Polen",
+      "chronicConditions": "Cáncer de Pulmón"
     }
   ],
   "medications": [
@@ -72,19 +84,19 @@
       "id": "34c7",
       "code": "AMOX",
       "name": "Amoxicilina",
-      "stock": 50
+      "stock": 40
     },
     {
       "id": "a3ad",
       "code": "DZP-001",
       "name": "Diazepam",
-      "stock": 60
+      "stock": 30
     },
     {
       "id": "0e3e",
       "code": "ELT-9243",
       "name": "Eltrombopag 25 mg",
-      "stock": 45
+      "stock": 30
     },
     {
       "id": "6072",
@@ -96,7 +108,7 @@
       "id": "a70d",
       "code": "PARA-500",
       "name": "Paracetamol 500 mg",
-      "stock": 140
+      "stock": 80
     },
     {
       "id": "9e5d",
@@ -120,7 +132,65 @@
       "id": "918a",
       "code": "LORA-010",
       "name": "Loratadina 10 mg",
-      "stock": 80
+      "stock": 65
+    }
+  ],
+  "requests": [
+    {
+      "id": "1",
+      "patientId": "1",
+      "medicationId": "1",
+      "qty": 20,
+      "status": "ENTREGADA",
+      "createdAt": "2024-06-01T10:15:00Z"
+    },
+    {
+      "id": "3",
+      "patientId": "3476",
+      "medicationId": "a3ad",
+      "qty": 15,
+      "status": "ENTREGADA",
+      "createdAt": "2024-06-03T09:45:00Z"
+    },
+    {
+      "id": "367b",
+      "patientId": "bb44",
+      "medicationId": "a3ad",
+      "qty": 30,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-12T02:48:21.440Z"
+    },
+    {
+      "id": "aa27",
+      "patientId": "5c61",
+      "medicationId": "a70d",
+      "qty": 60,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-12T02:58:16.927Z"
+    },
+    {
+      "id": "2b6e",
+      "patientId": "bb44",
+      "medicationId": "918a",
+      "qty": 15,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-12T03:36:28.889Z"
+    },
+    {
+      "id": "b5e5",
+      "patientId": 3476,
+      "medicationId": "34c7",
+      "qty": 10,
+      "status": "PREPARANDO",
+      "createdAt": "2025-12-12T03:36:55.491Z"
+    },
+    {
+      "id": "ec04",
+      "patientId": "f0ac",
+      "medicationId": "0e3e",
+      "qty": 15,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-12T07:46:47.848Z"
     }
   ],
   "users": [

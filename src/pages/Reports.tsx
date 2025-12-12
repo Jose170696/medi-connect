@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-
 import { listMedications, type Medication } from "../api/medications";
 import { listPatients, type Patient, type Id } from "../api/patients";
 import { listRequests, type Request } from "../api/requests";
 
-// Helpers para ids mixtos (number | string)
+// Helpers para ids mixtos
 const eqId = (a?: Id, b?: Id) => String(a) === String(b);
 const byId = <T extends { id?: Id }>(list?: T[], id?: Id) =>
   list?.find((x) => eqId(x.id, id));
@@ -17,6 +16,26 @@ const medLabelOf = (id?: Id, meds?: Medication[]) => {
   const m = byId(meds, id);
   return m ? `${m.code} — ${m.name}` : "—";
 };
+
+// ===== Utilidad para descargar CSV =====
+function downloadCSV(filename: string, rows: string[][]) {
+  const csvContent = rows.map((r) =>
+    r.map((cell) => {
+      // escapamos comillas y separamos con ;
+      const v = String(cell ?? "");
+      const safe = v.replace(/"/g, '""');
+      return `"${safe}"`;
+    }).join(";")
+  ).join("\r\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 export default function Reports() {
   const { data: meds = [] } = useQuery<Medication[]>({
@@ -34,10 +53,8 @@ export default function Reports() {
     queryFn: listRequests,
   });
 
-  // ===== Reporte de inventario =====
   const totalStock = meds.reduce((sum, m) => sum + (m.stock ?? 0), 0);
 
-  // ===== Reporte de entregas =====
   const delivered = reqs
     .filter((r) => r.status === "ENTREGADA")
     .slice()
@@ -45,6 +62,30 @@ export default function Reports() {
       (a, b) =>
         new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
     );
+
+  // ==== EXPORTADORES ====
+  const exportInventario = () => {
+    const rows: string[][] = [
+      ["Código", "Nombre", "Stock"],
+      ...meds.map((m) => [m.code, m.name, String(m.stock)]),
+      [],
+      ["Stock total", "", String(totalStock)],
+    ];
+    downloadCSV("reporte_inventario.csv", rows);
+  };
+
+  const exportEntregas = () => {
+    const rows: string[][] = [
+      ["Paciente", "Medicamento", "Cantidad", "Fecha entrega"],
+      ...delivered.map((r) => [
+        patientNameOf(r.patientId, patients),
+        medLabelOf(r.medicationId, meds),
+        String(r.qty),
+        new Date(r.createdAt).toLocaleString(),
+      ]),
+    ];
+    downloadCSV("reporte_entregas.csv", rows);
+  };
 
   return (
     <section className="space-y-6">
@@ -70,17 +111,26 @@ export default function Reports() {
               Resumen de códigos, nombres y unidades disponibles.
             </p>
           </div>
-          <p className="text-sm text-gray-600">
-            Stock total:{" "}
-            <span className="font-semibold">{totalStock}</span> unidades
-          </p>
+
+          <div className="flex items-center gap-3">
+            <p className="text-sm text-gray-600">
+              Stock total:{" "}
+              <span className="font-semibold">{totalStock}</span> unidades
+            </p>
+            <button
+              onClick={exportInventario}
+              className="px-3 py-2 text-xs rounded bg-blue-600 text-white"
+            >
+              Exportar inventario (CSV)
+            </button>
+          </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="text-left border-b">
               <tr>
-                <th className="p-3">Código</th>
+                <th className="p-3">Codigo</th>
                 <th className="p-3">Nombre</th>
                 <th className="p-3">Stock</th>
               </tr>
@@ -114,10 +164,19 @@ export default function Reports() {
               Solicitudes marcadas como <strong>"ENTREGADA"</strong>.
             </p>
           </div>
-          <p className="text-sm text-gray-600">
-            Total entregas:{" "}
-            <span className="font-semibold">{delivered.length}</span>
-          </p>
+
+          <div className="flex items-center gap-3">
+            <p className="text-sm text-gray-600">
+              Total entregas:{" "}
+              <span className="font-semibold">{delivered.length}</span>
+            </p>
+            <button
+              onClick={exportEntregas}
+              className="px-3 py-2 text-xs rounded bg-emerald-600 text-white"
+            >
+              Exportar entregas (CSV)
+            </button>
+          </div>
         </div>
 
         <div className="overflow-x-auto">
