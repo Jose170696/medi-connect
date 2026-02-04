@@ -25,7 +25,7 @@ const statusLabel: Record<Request["status"], string> = {
 };
 
 type Props = {
-  patientId: Id; // ✅ antes era number
+  patientId: Id; 
 };
 
 export default function PatientRequestsList({ patientId }: Props) {

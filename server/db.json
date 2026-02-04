@@ -71,6 +71,42 @@
       "bloodType": "A-",
       "allergies": "Polen",
       "chronicConditions": "Cáncer de Pulmón"
+    },
+    {
+      "id": "2673",
+      "idNumber": "207500875",
+      "name": "Jenifer Campos",
+      "birthDate": "1996-03-06",
+      "phone": "61487592",
+      "email": "jencamb@gmail.com",
+      "address": "Alajuela",
+      "bloodType": "B+",
+      "allergies": "",
+      "chronicConditions": "gastritis cronica"
+    },
+    {
+      "id": "5d24",
+      "idNumber": "123456789",
+      "name": "Paciente Prueba",
+      "birthDate": "2025-12-17",
+      "phone": "12345678",
+      "email": "prueba@gmail.com",
+      "address": "ABC",
+      "bloodType": "O+",
+      "allergies": "Prueba",
+      "chronicConditions": "Prueba"
+    },
+    {
+      "id": "aae5",
+      "idNumber": "164253879",
+      "name": "Gerardo Rivas",
+      "birthDate": "1990-06-14",
+      "phone": "616421543",
+      "email": "gerardo@gmail.com",
+      "address": "San Jose",
+      "bloodType": "O+",
+      "allergies": "",
+      "chronicConditions": ""
     }
   ],
   "medications": [
@@ -78,13 +114,13 @@
       "id": "1",
       "code": "IBU-400",
       "name": "Ibuprofeno 400mg",
-      "stock": 116
+      "stock": 101
     },
     {
       "id": "34c7",
       "code": "AMOX",
       "name": "Amoxicilina",
-      "stock": 40
+      "stock": 25
     },
     {
       "id": "a3ad",
@@ -133,6 +169,18 @@
       "code": "LORA-010",
       "name": "Loratadina 10 mg",
       "stock": 65
+    },
+    {
+      "id": "a0cf",
+      "code": "PRU",
+      "name": "Prueba",
+      "stock": 0
+    },
+    {
+      "id": "3114",
+      "code": "SOF",
+      "name": "salbutamol",
+      "stock": 0
     }
   ],
   "requests": [
@@ -181,7 +229,7 @@
       "patientId": 3476,
       "medicationId": "34c7",
       "qty": 10,
-      "status": "PREPARANDO",
+      "status": "ENTREGADA",
       "createdAt": "2025-12-12T03:36:55.491Z"
     },
     {
@@ -191,6 +239,38 @@
       "qty": 15,
       "status": "ENTREGADA",
       "createdAt": "2025-12-12T07:46:47.848Z"
+    },
+    {
+      "id": "5d10",
+      "patientId": 2673,
+      "medicationId": "34c7",
+      "qty": 15,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-15T17:09:04.829Z"
+    },
+    {
+      "id": "98ac",
+      "patientId": "5d24",
+      "medicationId": "a0cf",
+      "qty": 1,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-18T17:16:14.616Z"
+    },
+    {
+      "id": "302c",
+      "patientId": 1,
+      "medicationId": 1,
+      "qty": 15,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-18T18:03:26.332Z"
+    },
+    {
+      "id": "3dc6",
+      "patientId": "aae5",
+      "medicationId": 3114,
+      "qty": 150,
+      "status": "ENTREGADA",
+      "createdAt": "2025-12-19T00:40:52.266Z"
     }
   ],
   "users": [
